@@ -5,12 +5,14 @@ from gui.i_view import IView
 
 from maps.archersduel import ArchersDuelMap
 from maps.betterarmies import BetterArmiesMap
+from maps.marcelsmap import MarcelsMap
 from gui.view_type import ViewType
 
 class SelectBattleView(IView):
     AVAILABLE_MAPS = [
         ("ArchersDuelMap", ArchersDuelMap()),
         ("BetterArmiesMap", BetterArmiesMap()),
+        ("1 vs 1", MarcelsMap()),
     ]
 
     def __init__(self, main_window):

@@ -12,17 +12,10 @@ class IView(Canvas):
         self.bind("<Button-3>", self.right_button_callback)
 
     def button_callback(self, event, right=False):
-        print(f"unimlemented click on view{event.x} {event.y} {right}")
+        print(f"uniplemented click on view{event.x} {event.y} {right}")
 
     def right_button_callback(self, event):
         self.button_callback(event, right=True)
-
-    def show(self):
-        self.itemconfigure(id, state='normal')
-        self.paint()
-
-    def hide(self):
-        self.itemconfigure(id, state='hidden')
 
     def on_resize(self, event):
         self.paint()
@@ -31,5 +24,5 @@ class IView(Canvas):
         pass
 
     def on_key_click(self, key):
-        print(f"unimlemented on_key_click {key}")
+        print(f"uniplemented on_keyboard_click '{key}'")
     

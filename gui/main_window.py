@@ -22,11 +22,10 @@ class MainWindow(Canvas):
 
     def open_view(self, view_type: ViewType):
         if self.current_view is not None:
-            self.current_view.hide()
+            self.current_view.place(x=-1, y=-1, width=0, height=0)
         self.current_view = self.views[view_type]
 
         self.current_view.place(x=5, y=5, width=self.winfo_width()-10, height=self.winfo_height()-10)
-        self.current_view.show()
         self.focus_set()
         
     def on_resize(self, event):
