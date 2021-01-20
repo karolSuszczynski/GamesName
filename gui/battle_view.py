@@ -62,7 +62,7 @@ class BattleView(IView):
             x = int((event.x -  30*(y%2)) / 60)
             if x >= 0 and x < self.battlefield.W and y >= 0 and y < self.battlefield.H:
                 self.cliked(x,y, right)
-                self.plot()
+                self.paint()
             event = not event
 
     def callback_key(self, event):
