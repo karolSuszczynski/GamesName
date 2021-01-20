@@ -1,14 +1,14 @@
-from battle_field import Battlefield
+from gui.battle_view import Battlefield
 
 class AbstractMap():
     def __init__(self, board_width, board_height):
         self.board_width = board_width
         self.board_height = board_height
         
-    def get_battlefield(self, window):
+    def get_battlefield(self):
         players = self._create_players()
         players = players[:2]
-        battlefield = Battlefield(window, self.board_width, self.board_height, players)
+        battlefield = Battlefield(self.board_width, self.board_height, players)
         
         for player, units_for_one_player in zip(players, self._create_all_units()):
             for x, y, unit in units_for_one_player:

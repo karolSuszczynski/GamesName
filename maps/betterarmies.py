@@ -6,9 +6,9 @@ from numpy.random import randint
 
 class BetterArmiesMap(AbstractMap):
     BOARD_WIDTH = 16
-    BOARD_HEIGT = 11
+    BOARD_HEIGHT = 11
     def __init__(self):
-        super().__init__(self.BOARD_WIDTH, self.BOARD_HEIGT)
+        super().__init__(self.BOARD_WIDTH, self.BOARD_HEIGHT)
         
     def _create_players(self):
         return [Player(1, "#0000b0"), Player(2, "#ff0b03")]
