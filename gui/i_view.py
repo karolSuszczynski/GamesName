@@ -15,8 +15,7 @@ class IView(Canvas):
         print(f"unimlemented click on view{event.x} {event.y} {right}")
 
     def right_button_callback(self, event):
-        assert self.battlefield is not None
-        self.callback(event, right=True)
+        self.button_callback(event, right=True)
 
     def show(self):
         self.itemconfigure(id, state='normal')

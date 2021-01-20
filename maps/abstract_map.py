@@ -1,4 +1,4 @@
-from gui.battle_view import Battlefield
+from battlefield import Battlefield
 
 class AbstractMap():
     def __init__(self, board_width, board_height):
