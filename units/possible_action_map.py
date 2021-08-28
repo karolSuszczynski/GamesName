@@ -1,8 +1,6 @@
 from tkinter import *
-from PIL import Image, ImageTk
-import numpy as np
 
-class AbstractActionMap:
+class AbstractActionMapGenerator:
     
     def __init__(self, battlefield):
         self.battlefield = battlefield
@@ -28,18 +26,22 @@ class AbstractActionMap:
                     continue
                 if self.grid[y][x] is None:
                     action_map[y][x] = "move"
-                if self.can_go_throw(x,y):
+                if self.can_go_through(x,y):
                     new_filed_for_check += self.get_neighbour(x,y)
             filed_for_check = new_filed_for_check
         return action_map
           
-    def can_go_throw(self, x, y):
+    def can_go_through(self, x, y):
         assert False, "Not implemented abstract nethod"
         
-class LandMoveActionMap(AbstractActionMap):
-    def can_go_throw(self, x, y):
+class GroundActionMapGenerator(AbstractActionMapGenerator):
+    def can_go_through(self, x, y):
         if self.grid[y][x] is None:
             return True
         return False
+
+class AirbornActionMapGenerator(AbstractActionMapGenerator):
+    def can_go_through(self, x, y):
+        return True
                 
         

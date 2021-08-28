@@ -1,7 +1,3 @@
-from tkinter import *
-from PIL import Image, ImageTk
-import numpy as np
-
 class Player:
     def __init__(self, id, color):
         self.id = id

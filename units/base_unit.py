@@ -1,7 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import numpy as np
-from units.possible_action_map import LandMoveActionMap
+from sqlalchemy.sql.functions import now
+
+from units.possible_action_map import GroundActionMapGenerator
+from units.attack_and_defence import Attack, calculate_damage
+from units.armors import no_armor
+from units.resistance_types import human_resistance
 
 def get_distance(x1,y1,x2,y2):
     y_distance = np.abs(y2 - y1)
@@ -14,13 +19,17 @@ def get_distance(x1,y1,x2,y2):
     return x_distance + y_distance
 
 class BaseUnit:
-    def __init__(self, image_path, speed, hp, rest_ability, attack, reach = 1, healing = 0, MoveActionMap = LandMoveActionMap):
+    def __init__(self, image_path, speed, hp, rest_ability, attack, reach = 1, healing = 0,
+                 armor=no_armor, resistance=human_resistance, MoveActionMapGenerator = GroundActionMapGenerator):
+        assert isinstance(attack, Attack)
         self.speed = speed
         self.max_hp = hp
         self.rest_ability = rest_ability
         self.attack = attack
         self.reach = reach
         self.healing = healing
+        self.armor = armor
+        self.resistance = resistance
         
         self.hp = hp
         self.current_attack = attack
@@ -33,7 +42,7 @@ class BaseUnit:
         self.x = None
         self.y = None
         
-        self.MoveActionMap = MoveActionMap
+        self.MoveActionMapGenerator = MoveActionMapGenerator
         self.move_action_map = None
     
     def get_params(self):
@@ -64,7 +73,7 @@ class BaseUnit:
         self.x = x
         self.y = y
         self.battlefield.grid[self.y][self.x] = self
-        self.move_action_map = self.MoveActionMap(self.battlefield)
+        self.move_action_map = self.MoveActionMapGenerator(self.battlefield)
         
     def try_move(self,x,y):
         action_map = self.get_action_map()
@@ -83,7 +92,8 @@ class BaseUnit:
             return False
         target = self.battlefield.grid[y][x]
         assert target is not None
-        target.get_damaged(self.current_attack)
+        damage = calculate_damage(self.current_attack, target.armor, target.resistance)
+        target.get_damaged(damage)
         return True
         
         
