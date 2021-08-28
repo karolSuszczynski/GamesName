@@ -50,9 +50,11 @@ class BaseUnit:
         "speed" : self.speed,
         "hp" : f"{self.hp} / {self.max_hp}",
         "rest_ability" : self.rest_ability,
+        "reach": self.reach,
+        "healing": self.healing,
         "attack" : self.attack,
-        "reach" : self.reach,
-        "healing" : self.healing,
+        "armor": self.armor,
+        "resistance": self.resistance,
         }
         
     def get_action_map(self):

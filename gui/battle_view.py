@@ -67,10 +67,13 @@ class BattleView(IView):
             self.create_oval(x,y,x+20,y+20,fill="#999933")
             
             params = current_unit.get_params()
+
+            text = ""
             for i, param in enumerate(params):
-                self.create_text((self.battle_engine.battlefield.W+2) * 60,30+ i * 60,
-                                 fill=current_unit.owner.color,
-                                 font="Times 20 italic bold",
-                                 anchor=tkinter.W,
-                                 text=f"{param} : {params[param]}")
+                text += f"{param} : {params[param]}\n"
+            self.create_text((self.battle_engine.battlefield.W + 2) * 60, 30,
+                             fill=current_unit.owner.color,
+                             font="Times 20 italic bold",
+                             anchor=tkinter.NW,
+                             text=text)
             

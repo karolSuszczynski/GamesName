@@ -1,5 +1,5 @@
 from maps.abstract_map import AbstractMap
-from units.units import *
+from units_list import *
 from player import Player
 
 

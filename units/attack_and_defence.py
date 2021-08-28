@@ -20,12 +20,25 @@ class Attack:
     def __init__(self, single_attacks:list):
         self.single_attacks = single_attacks
 
+    def __str__(self):
+        result = ""
+        for attack in self.single_attacks:
+            result += f"\n    {attack.type.name} {attack.value}"
+        return result
+
 class Armor:
-    def __init__(self, defence_map={}):
-        self.defence_map = defence_map
+    def __init__(self, armor_map={}):
+        self.armor_map = armor_map
 
     def get_value(self, type:AttackType):
-        return self.defence_map.get(type, 0)
+        return self.armor_map.get(type, 0)
+
+    def __str__(self):
+        result = ""
+        for armor_type in self.armor_map:
+            result += f"\n    {armor_type.name} {self.armor_map[armor_type]}"
+        return result
+
 
 class Resistance:
     def __init__(self, resistance_map={}):
@@ -33,6 +46,14 @@ class Resistance:
 
     def get_value(self, type:AttackType):
         return self.resistance_map.get(type, 0)
+
+    def __str__(self):
+        if len(self.resistance_map) == 0:
+            return "---"
+        result = ""
+        for resistance_type in self.resistance_map:
+            result += f"\n    {resistance_type.name} {self.resistance_map[resistance_type]}"
+        return result
 
 def calculate_damage(attacks, armor, resistance):
     total_damage = 0
