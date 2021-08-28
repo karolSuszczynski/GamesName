@@ -3,10 +3,10 @@ from units.attack_and_defence import AttackType, Armor
 def get_leather_armor(quality=1):
     return Armor(
         {
-            AttackType.BLUNT: 1+1*quality,
+            AttackType.BLUNT: 1 + 1*quality,
             AttackType.PIERCE: 3*quality,
             AttackType.SLASH: 4*quality,
-            AttackType.HEAT: 1 + 2*quality,
+            AttackType.HEAT: 2*quality,
             AttackType.COLD: 3 + 2*quality,
             AttackType.POISON: 0,
             AttackType.MAGIC: 0,
