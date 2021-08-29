@@ -17,6 +17,7 @@ class BattleEngine:
         
     def set_battlefield(self, battlefield):
         self.battlefield = battlefield
+        self.next_units = None
         self.next_unit()
     
     def next_unit(self):
