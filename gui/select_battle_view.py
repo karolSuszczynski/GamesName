@@ -28,3 +28,6 @@ class SelectBattleView(AbstractSelectFromListView):
         battle_view = self.main_window.views[ViewType.BATTLE_VIEW]
         battle_view.set_battlefield(map[1].get_battlefield())
         self.main_window.open_view(ViewType.BATTLE_VIEW)
+
+    def on_back_click(self):
+        self.main_window.open_view(ViewType.MAIN_MENU_VIEW)

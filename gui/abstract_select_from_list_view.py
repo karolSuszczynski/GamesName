@@ -3,10 +3,15 @@ from gui.i_view import IView
 
 class AbstractSelectFromListView(IView):
 
-    def __init__(self, main_window, list_of_items):
+    def __init__(self, main_window, list_of_items, back_is_visible=True):
         super().__init__(main_window)
         
         self.list_of_items = list_of_items
+        self.back_idx = None
+        if back_is_visible:
+            self.back_idx = len(self.list_of_items)
+            self.list_of_items.append(["Back", None])
+
 
         self.button_x = 200
         self.button_y0 = 50
@@ -23,12 +28,17 @@ class AbstractSelectFromListView(IView):
             idx = int(y / self.button_y_shift)
             rest = y - idx * self.button_y_shift
             if rest < self.button_h and idx < len(self.list_of_items):
-                self.on_button_click(idx)
-
+                if idx == self.back_idx:
+                    self.on_back_click()
+                else:
+                    self.on_button_click(idx)
             event = not event
 
     def on_button_click(self, id):
         raise RuntimeError("Not implememnted abstarct method on_button_click")
+
+    def on_back_click(self):
+        raise RuntimeError("Not implememnted abstarct method on_back_click")
 
     def paint(self):
         self.delete("all")

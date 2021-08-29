@@ -10,7 +10,7 @@ class MainMenuView(AbstractSelectFromListView):
     ]
 
     def __init__(self, main_window):
-        super().__init__(main_window, self.AVAILABLE_VIEWS)
+        super().__init__(main_window, self.AVAILABLE_VIEWS, back_is_visible=False)
 
     def on_button_click(self, id):
         view = self.AVAILABLE_VIEWS[id]

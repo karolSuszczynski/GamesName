@@ -7,7 +7,6 @@ class AbstractBattleMap():
         
     def get_battlefield(self):
         squads = self._create_squads()
-        squads = squads[:2]
         battlefield = Battlefield(self.board_width, self.board_height, squads)
         
         for squad, units_for_one_squad in zip(squads, self._create_all_units()):

@@ -2,10 +2,18 @@ import tkinter
 from PIL import Image, ImageTk
 import numpy as np
 from gui.i_view import IView
-from battle_maps.battle_engine import BattleEngine
+from strategic_maps.strategic_engine import StrategicEngine
 
 
 class StrategicMapView(IView):
+    ground_height_color_map = \
+        {
+            0: "#0000ff",
+            1: "#00ff00",
+            2: "#aabbff",
+            3: "#ff0000",
+        }
+
     def __init__(self, main_window):
         super().__init__(main_window)
 
@@ -13,67 +21,46 @@ class StrategicMapView(IView):
         img = img.resize((50, 50), Image.ANTIALIAS)
         self.empty_image = ImageTk.PhotoImage(img)
 
-        self.battle_engine = BattleEngine(self.main_window)
+        self.strategic_engine = StrategicEngine(self.main_window)
 
-    def set_strategic_map(self, strategic_map):
-        self.battle_engine.set_battlefield(strategic_map)
+    def set_startegicfield(self, startegicfield):
+        assert startegicfield is not None
+        self.strategic_engine.set_startegicfield(startegicfield)
 
     def button_callback(self, event, right=False):
-        assert self.battle_engine.battlefield is not None
+        assert self.strategic_engine.startegicfield is not None
         if event:
             y = int(event.y / 60)
             x = int((event.x - 30 * (y % 2)) / 60)
-            if x >= 0 and x < self.battle_engine.battlefield.W and y >= 0 and y < self.battle_engine.battlefield.H:
-                self.battle_engine.cliked(x, y, right)
+            if x >= 0 and x < self.strategic_engine.battlefield.W and y >= 0 and y < self.strategic_engine.battlefield.H:
+                self.strategic_engine.cliked(x, y, right)
                 self.paint()
             event = not event
 
     def callback_key(self, event):
-        assert self.battle_engine.battlefield is not None
+        assert self.strategic_engine.battlefield is not None
         if event:
             key = event.char
             event = not event
             print(key)
 
     def paint(self):
-        assert self.battle_engine.battlefield is not None
+        assert self.strategic_engine.startegicfield is not None
         self.delete("all")
         W = self.winfo_width()
         H = self.winfo_height()
         self.create_rectangle(0, 0, W, H, fill="#172032")
-        for y in range(self.battle_engine.battlefield.H):
-            for x in range(self.battle_engine.battlefield.W):
-                if self.battle_engine.action_map is not None:
-                    action = self.battle_engine.action_map[y][x]
-                    if action is not None:
-                        color = {"move": "#779922", "attack": "#ff7788", "support": "#22ff77"}[action]
-                        self.create_rectangle(-5 + x * 60 + 30 * (y % 2), -5 + y * 60,
-                                              55 + x * 60 + 30 * (y % 2), 55 + y * 60,
-                                              fill=color)
-                unit = self.battle_engine.battlefield[y][x]
-                if unit is None:
-                    self.create_image(x * 60 + 30 * (y % 2), y * 60, anchor=tkinter.NW, image=self.empty_image)
-                else:
-                    self.create_image(x * 60 + 30 * (y % 2), y * 60, anchor=tkinter.NW, image=unit.image)
-                    self.create_text(30 + x * 60 + 30 * (y % 2), 30 + y * 60, fill=unit.owner.color,
-                                     font="Times 20 italic bold",
-                                     text=str(int(np.round(unit.hp, 0))))
-        current_unit = self.battle_engine.current_unit
-        if current_unit is not None:
-            x = current_unit.x
-            y = current_unit.y
-            x = 15 + x * 60 + 30 * (y % 2)
-            y = 15 + y * 60
-            self.create_oval(x, y, x + 20, y + 20, fill="#999933")
+        startegicfield = self.strategic_engine.startegicfield
 
-            params = current_unit.get_params()
+        for item_y in range(startegicfield.H):
+            for item_x in range(startegicfield.W):
+                single_field = startegicfield[item_y][item_x]
+                assert single_field is not None
 
-            text = ""
-            for i, param in enumerate(params):
-                text += f"{param} : {params[param]}\n"
-            self.create_text((self.battle_engine.battlefield.W + 2) * 60, 30,
-                             fill=current_unit.owner.color,
-                             font="Times 20 italic bold",
-                             anchor=tkinter.NW,
-                             text=text)
-
+                W = 60
+                H = 60
+                x = item_x * W + W * (item_y % 2) / 2
+                y = item_y * H
+                #self.create_image(x * 60 + 30 * (y % 2), y * 60, anchor=tkinter.NW, image=self.empty_image)
+                self.create_rectangle(x, y, x+W, y+H,
+                                      fill=self.ground_height_color_map[single_field.ground_height])
