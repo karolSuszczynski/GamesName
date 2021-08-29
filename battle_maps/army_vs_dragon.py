@@ -1,9 +1,9 @@
-from maps.abstract_map import AbstractMap
+from battle_maps.abstract_battle_map import AbstractBattleMap
 from units_list import *
 from player import Player
 
 
-class ArmyVsDragon(AbstractMap):
+class ArmyVsDragon(AbstractBattleMap):
     BOARD_WIDTH = 16
     BOARD_HEIGT = 9
     def __init__(self):

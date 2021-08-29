@@ -3,10 +3,10 @@ from PIL import Image, ImageTk
 import numpy as np
 from gui.i_view import IView
 
-from maps.archersduel import ArchersDuelMap
-from maps.betterarmies import BetterArmiesMap
-from maps.marcelsmap import MarcelsMap
-from maps.army_vs_dragon import ArmyVsDragon
+from battle_maps.archersduel import ArchersDuelMap
+from battle_maps.betterarmies import BetterArmiesMap
+from battle_maps.marcelsmap import MarcelsMap
+from battle_maps.army_vs_dragon import ArmyVsDragon
 from gui.view_type import ViewType
 
 class SelectBattleView(IView):

@@ -1,10 +1,10 @@
-from maps.abstract_map import AbstractMap
+from battle_maps.abstract_battle_map import AbstractBattleMap
 from units_list import *
 from player import Player
 from numpy.random import randint
 
 
-class CavalryDuelMap(AbstractMap):
+class CavalryDuelMap(AbstractBattleMap):
     BOARD_WIDTH = 16
     BOARD_HEIGT = 9
     def __init__(self):

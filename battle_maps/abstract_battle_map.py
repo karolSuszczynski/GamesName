@@ -1,6 +1,6 @@
 from battlefield import Battlefield
 
-class AbstractMap():
+class AbstractBattleMap():
     def __init__(self, board_width, board_height):
         self.board_width = board_width
         self.board_height = board_height

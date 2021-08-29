@@ -1,10 +1,10 @@
-from maps.abstract_map import AbstractMap
+from battle_maps.abstract_battle_map import AbstractBattleMap
 from units_list import *
 from player import Player
 from numpy.random import randint
 
 
-class RandomMap(AbstractMap):
+class RandomMap(AbstractBattleMap):
     COMMON_UNITS_COUNT = 2
     BASIC_UNITS_COUNT = 3
     BETTER_UNITS_COUNT = 2
