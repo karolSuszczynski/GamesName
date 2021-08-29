@@ -6,7 +6,7 @@ window =Tk()
 window.geometry("1000x700")
 main_window = MainWindow(window)
 
-main_window.open_view(ViewType.SELECT_BATTLE_VIEW)
+main_window.open_view(ViewType.MAIN_MENU_VIEW)
 window.title("gra")
 window.mainloop()
 

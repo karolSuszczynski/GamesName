@@ -2,13 +2,13 @@ import tkinter
 from PIL import Image, ImageTk
 import numpy as np
 from gui.i_view import IView
-from battlefield import Battlefield
+from battle_maps.battlefield import Battlefield
 from gui.view_type import ViewType
 
 
-class BattleEngine:
+class StrategicEngine:
     def __init__(self, main_window):
-        self.battlefield = None
+        self.strategicfield = None
         self.focus = None
         self.next_units = None
         self.current_unit = None
@@ -31,8 +31,8 @@ class BattleEngine:
         
     def random_order(self):
         self.next_units = []
-        for player in self.battlefield.players:
-            for unit in player.units:
+        for squad in self.battlefield.squads:
+            for unit in squad.units:
                 if unit.hp > 0:
                     self.next_units.append(unit)
         np.random.shuffle(self.next_units)
@@ -61,17 +61,17 @@ class BattleEngine:
             
     def check_winning_conditions(self):
         winner = None
-        for player in self.battlefield.players:
-            living_units_count = player.get_living_units_count()
+        for squad in self.battlefield.squads:
+            living_units_count = squad.get_living_units_count()
             if living_units_count > 0:
                 if winner is None:
-                    winner = player
+                    winner = squad
                 else:
                     return
         if winner is None:
             print("Nobody has any units")
         else:
-            print(f"{player.id} won")
+            print(f"{squad.id} won")
             self.main_window.open_view(ViewType.SELECT_BATTLE_VIEW)
             
         

@@ -1,6 +1,6 @@
 from battle_maps.abstract_battle_map import AbstractBattleMap
 from units_list import *
-from player import Player
+from squad import Squad
 from numpy.random import randint
 
 
@@ -10,8 +10,8 @@ class MarcelsMap(AbstractBattleMap):
     def __init__(self):
         super().__init__(self.BOARD_WIDTH, self.BOARD_HEIGT)
         
-    def _create_players(self):
-        return [Player(1, "#0000b0"), Player(2, "#ff0b03")]
+    def _create_squads(self):
+        return [Squad(1, "#0000b0"), Squad(2, "#ff0b03")]
         
     def _create_all_units(self):
         return [[(1,1, Footman())

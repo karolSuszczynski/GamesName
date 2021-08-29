@@ -6,5 +6,5 @@ from units.attacks import get_sword_attack
 
 class Tower(UnitWithAmmo):
     def __init__(self):
-        super().__init__("img/tower.png", speed=0, hp=999, rest_ability=0.75, attack=99, reach=1, healing=3, ammo=7, ammo_reach=5, ammo_attack=74)
+        super().__init__("img/tower.png", speed=0, hp=999, rest_ability=0.75, attack=get_sword_attack(99), reach=1, healing=3, ammo=7, ammo_reach=5, ammo_attack=74)
 

@@ -4,6 +4,10 @@ import numpy as np
 
 from gui.select_battle_view import SelectBattleView
 from gui.battle_view import BattleView
+from gui.castle_view import CastleView
+from gui.main_menu_view import MainMenuView
+from gui.select_strategic_map_view import SelectStrategicMapView
+from gui.strategic_map_view import StrategicMapView
 from gui.view_type import ViewType
 
 
@@ -16,8 +20,12 @@ class MainWindow(Canvas):
         self.current_view = None
 
         self.views = {
+            ViewType.MAIN_MENU_VIEW: MainMenuView(self),
             ViewType.SELECT_BATTLE_VIEW: SelectBattleView(self),
             ViewType.BATTLE_VIEW: BattleView(self),
+            ViewType.SELECT_STRATEGIC_MAP_VIEW: SelectStrategicMapView(self),
+            ViewType.STRATEGIC_MAP_VIEW: StrategicMapView(self),
+            ViewType.CASTLE_VIEW: CastleView(self),
         }
 
     def open_view(self, view_type: ViewType):
